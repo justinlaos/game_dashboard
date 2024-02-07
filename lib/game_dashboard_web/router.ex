@@ -20,6 +20,15 @@ defmodule GameDashboardWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/api", GameDashboardWeb do
+    pipe_through :api
+
+    get "/v1/riot/lol/get_summoner/:name", Riot.LolController, :get_summoner
+    get "/v1/riot/lol/get_summoner_matches/:puuid", Riot.LolController, :get_summoner_matches
+    get "/v1/riot/lol/get_match/:id", Riot.LolController, :get_match
+    get "/v1/riot/lol/get_summoner_total_data/:puuid", Riot.LolController, :get_summoner_total_data
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", GameDashboardWeb do
   #   pipe_through :api
